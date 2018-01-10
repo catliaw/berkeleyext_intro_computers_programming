@@ -1,0 +1,7 @@
+*.docx
+*.JPG
+*.MOV
+*.png
+*.pdf
+venv/
+Module5/Hello.py

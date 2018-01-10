@@ -63,7 +63,7 @@ def word_to_pig_latin(string):
 for i, word in enumerate(original_words):
     #in case of floating chunks of punctuation
     #does NOT work for punctuation followed directly by letters
-    #assuming some sort of grammar will be used 
+    #assuming some proper grammar will be used 
     if word[0] in punctuation:
         pig_latin_sentence += word
     #words followed by punctuation

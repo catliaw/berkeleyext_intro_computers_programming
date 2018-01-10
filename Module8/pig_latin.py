@@ -7,12 +7,14 @@
 #(2) If a word begins with a vowel then "yay" is added to the end.
 #e.g."egg" becomes "eggyay" and "oak" becomes "oakyay".
 
-punctuation = [",", ".", ";", "!", "?"]
-
+# print("\nRunning in Python3 with input() function:\n")
 original_sentence = input("Please input a sentence to translate into Pig Latin: ")
+# print("\nRunning in Python2 with raw_input() function:\n")
+# original_sentence = raw_input("Please input a sentence to translate into Pig Latin: ")
 original_words = original_sentence.split(" ")
 pig_latin_sentence = ""
 all_caps = True
+punctuation = [",", ".", ";", "!", "?"]
 
 def word_to_pig_latin(string):
     cap_vowels = ["A", "E", "I", "O", "U"]
@@ -21,7 +23,8 @@ def word_to_pig_latin(string):
                       "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"]
     low_consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", \
                       "q", "r", "s", "t", "v", "w", "x", "y", "z"]
-    punctuation = [",", ".", ";", "!", "?"]
+    cap_diagraphs = ["CH", "SH", "TH", "WH"]
+    low_diagraphs = ["ch", "sh", "th", "wh"]
 
     all_caps = True
 
@@ -42,7 +45,10 @@ def word_to_pig_latin(string):
             return string + "yay"
     #if first letter in string is a lowercase consonant
     elif string[0] in low_consonants:
-        return string[1:] + string[0] + "ay"
+        if string[1] in low_consonants:
+            return string[2:] + string[0:2] + "ay"
+        else:
+            return string[1:] + string[0] + "ay"
     #if first letter in string is a uppercase consonant
     elif string[0] in cap_consonants:
         for letter in string:
@@ -51,10 +57,17 @@ def word_to_pig_latin(string):
                 all_caps = False
                 break
         if all_caps is True:
-            return string[1:] + string[0] + "AY"
+            if string[1] in cap_consonants:
+                return string[2:] + string[0:2] + "AY"
+            else:
+                return string[1:] + string[0] + "AY"
         else:
             all_caps = True
-            return string[1].upper() + string[2:] + string[0].lower() + "ay"
+            if string[1] in cap_consonants or string[1] in low_consonants:
+                return string[2:] + string[0:2] + "ay"
+            else:
+                return string[1:] + string[0] + "ay"
+                # return string[1].upper() + string[2:] + string[0].lower() + "ay"
     
     #in case anything else
     else:
@@ -77,7 +90,7 @@ for i, word in enumerate(original_words):
         #words without punctuation
         pig_latin_sentence += word_to_pig_latin(word)
     #add space after words that aren't the last word.
-    if i != (len(original_sentence) - 1):
+    if i != (len(original_words) - 1):
         pig_latin_sentence += " "
 
 print("\n" + pig_latin_sentence)

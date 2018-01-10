@@ -10,8 +10,8 @@
 # pass through it again. The sort will continue its passes through the list 
 # until the list is sorted.
 
-int_tup = input("Please input a list of comma-separated integers (ex. 9,5,6,2,66,33,1): ")
-int_list = list(int_tup)
+int_str = input("Please input a list of comma-separated integers (ex. 9,5,6,2,66,33,1): ")
+int_list = int_str.split(",")
 
 # function to turn a list or tuple of integers into a string
 # formatted with commas between each number
@@ -23,8 +23,6 @@ def list_tup_to_str(list_or_tup):
         else:
             final_str += str(num) + ","
     return final_str
-
-int_str = list_tup_to_str(int_tup)
 
 def bubble_sort(lst):
     passes = 0
